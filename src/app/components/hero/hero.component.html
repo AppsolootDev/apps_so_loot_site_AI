@@ -1,0 +1,348 @@
+<section class="hero" id="home" [class.intro-active]="!introComplete()">
+  <!-- Star + solar system canvas -->
+  <canvas #heroCanvas class="hero-canvas"></canvas>
+
+  <!-- Parallax background -->
+  <div class="hero-bg" #heroBg>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="grid-overlay"></div>
+    <div class="scan-line"></div>
+  </div>
+
+  <!-- Space characters -->
+  <div class="space-chars" aria-hidden="true">
+
+    <!-- Rocket flying across -->
+    <div class="char-rocket">
+      <svg viewBox="0 0 48 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Exhaust flame outer -->
+        <path d="M18 57C15 65 13 74 18 76C20 72 24 66 24 66C24 66 28 72 30 76C35 74 33 65 30 57Z" fill="#ff6b00" opacity="0.9"/>
+        <!-- Exhaust flame inner -->
+        <path d="M20 57C18 64 17 70 21 73C22 70 24 67 24 67C24 67 26 70 27 73C31 70 30 64 28 57Z" fill="#ffcc00"/>
+        <!-- Body -->
+        <path d="M14 45L14 26C14 13 21 4 24 2C27 4 34 13 34 26L34 45Z" fill="#d8e4f0"/>
+        <!-- Body shade right -->
+        <path d="M24 2C27 4 34 13 34 26L34 45L24 45Z" fill="#b8cedd"/>
+        <!-- Nose cone -->
+        <path d="M14 26C14 15 18 7 24 2C30 7 34 15 34 26Z" fill="#4bc8e8"/>
+        <!-- Nose shade -->
+        <path d="M24 2C30 7 34 15 34 26L24 26Z" fill="#2da8c8"/>
+        <!-- Porthole -->
+        <circle cx="24" cy="32" r="5.5" fill="#0a1224" stroke="#4bc8e8" stroke-width="1.2"/>
+        <circle cx="22.5" cy="30.5" r="2" fill="rgba(75,200,232,0.4)"/>
+        <!-- Left fin -->
+        <path d="M14 45L5 58L14 55Z" fill="#4bc8e8"/>
+        <!-- Right fin -->
+        <path d="M34 45L43 58L34 55Z" fill="#4bc8e8"/>
+        <!-- Engine nozzle -->
+        <rect x="17" y="52" width="14" height="5" rx="2" fill="#8aa0b8"/>
+        <!-- Engine rim -->
+        <rect x="15" y="51" width="18" height="3" rx="1.5" fill="#6a8098"/>
+      </svg>
+      <!-- Exhaust trail -->
+      <div class="rocket-trail"></div>
+    </div>
+
+    <!-- Floating astronaut -->
+    <div class="char-astronaut">
+      <svg viewBox="0 0 56 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- PLSS backpack -->
+        <rect x="13" y="37" width="9" height="14" rx="2" fill="#8aa0b8"/>
+        <rect x="14" y="39" width="5" height="3" rx="1" fill="#4bc8e8" opacity="0.6"/>
+        <!-- Body suit -->
+        <rect x="12" y="36" width="32" height="26" rx="10" fill="#d8e4f0"/>
+        <!-- Body suit shade -->
+        <path d="M28 36H44V62C44 66.4 40.4 62 36 62H28Z" fill="#b8cedd"/>
+        <!-- Left arm -->
+        <path d="M12 41C5 44 3 52 6 58" stroke="#d8e4f0" stroke-width="9" stroke-linecap="round"/>
+        <!-- Right arm -->
+        <path d="M44 41C51 44 53 52 50 58" stroke="#d8e4f0" stroke-width="9" stroke-linecap="round"/>
+        <!-- Left glove -->
+        <circle cx="5.5" cy="59" r="4.5" fill="#8aa0b8"/>
+        <!-- Right glove -->
+        <circle cx="50.5" cy="59" r="4.5" fill="#8aa0b8"/>
+        <!-- Left leg -->
+        <path d="M18 62L16 76" stroke="#d8e4f0" stroke-width="9" stroke-linecap="round"/>
+        <!-- Right leg -->
+        <path d="M38 62L40 76" stroke="#d8e4f0" stroke-width="9" stroke-linecap="round"/>
+        <!-- Left boot -->
+        <ellipse cx="15.5" cy="77" rx="6.5" ry="3.5" fill="#8aa0b8"/>
+        <!-- Right boot -->
+        <ellipse cx="40.5" cy="77" rx="6.5" ry="3.5" fill="#8aa0b8"/>
+        <!-- Helmet outer -->
+        <circle cx="28" cy="21" r="18" fill="#d8e4f0"/>
+        <!-- Visor -->
+        <path d="M13 21C13 29.3 19.9 36 28 36C36.1 36 43 29.3 43 21C43 12.7 36.1 6 28 6C19.9 6 13 12.7 13 21Z" fill="#d8e4f0"/>
+        <!-- Visor window -->
+        <path d="M16 19C16 26.2 21.4 32 28 32C34.6 32 40 26.2 40 19" fill="#0a1836" stroke="#4bc8e8" stroke-width="1.2"/>
+        <!-- Visor reflection -->
+        <path d="M20 12C22 11 25 10.5 28 10.5" stroke="rgba(255,255,255,0.55)" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M20 15C21.5 14 24 13.5 27 13.5" stroke="rgba(255,255,255,0.3)" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- Suit badge -->
+        <rect x="20" y="43" width="16" height="10" rx="3" fill="#4bc8e8" opacity="0.85"/>
+        <text x="28" y="50.5" font-size="5" font-weight="700" fill="#0a1224" text-anchor="middle" font-family="monospace">ASL</text>
+        <!-- Tether line -->
+        <path d="M50 45C56 38 55 27 50 20" stroke="#4bc8e8" stroke-width="1.3" stroke-dasharray="3 2.5" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <!-- Alien + UFO (AI / LLM) -->
+    <div class="char-alien-ufo">
+      <div class="ufo-labels">
+        <span class="ufo-label-llm">LLM</span>
+        <span class="ufo-label-ai">AI</span>
+      </div>
+      <svg viewBox="0 0 92 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="beamGrad" cx="50%" cy="0%" r="100%">
+            <stop offset="0%" stop-color="#4bc8e8" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#4bc8e8" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="domeGrad" cx="40%" cy="30%" r="80%">
+            <stop offset="0%" stop-color="#4ade80" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#4ade80" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Tractor beam -->
+        <path d="M32 65L18 94L74 94L60 65Z" fill="url(#beamGrad)"/>
+
+        <!-- UFO saucer shadow/glow -->
+        <ellipse cx="46" cy="64" rx="37" ry="10" fill="rgba(75,200,232,0.08)"/>
+        <!-- UFO saucer body -->
+        <ellipse cx="46" cy="61" rx="37" ry="9" fill="#12253a" stroke="#4bc8e8" stroke-width="1.4"/>
+        <ellipse cx="46" cy="60" rx="37" ry="8" fill="#0d1f30" stroke="#2a6a8a" stroke-width="0.7"/>
+
+        <!-- UFO lights -->
+        <circle class="ufo-light ul1" cx="15" cy="61" r="3.2" fill="#4bc8e8"/>
+        <circle class="ufo-light ul2" cx="26" cy="65" r="2.8" fill="#c5f219"/>
+        <circle class="ufo-light ul3" cx="46" cy="67" r="3.2" fill="#4bc8e8"/>
+        <circle class="ufo-light ul4" cx="66" cy="65" r="2.8" fill="#c5f219"/>
+        <circle class="ufo-light ul5" cx="77" cy="61" r="3.2" fill="#4bc8e8"/>
+
+        <!-- UFO dome -->
+        <ellipse cx="46" cy="53" rx="22" ry="17" fill="#091828" stroke="#4ade80" stroke-width="1.5"/>
+        <ellipse cx="46" cy="53" rx="22" ry="17" fill="url(#domeGrad)"/>
+
+        <!-- Alien body -->
+        <ellipse cx="46" cy="50" rx="10" ry="12" fill="#2a6a38"/>
+        <!-- Alien suit collar -->
+        <path d="M36 53C38 60 54 60 56 53" fill="#1a4a25"/>
+
+        <!-- Alien head -->
+        <ellipse cx="46" cy="35" rx="13" ry="15" fill="#35854a"/>
+        <!-- Head highlight -->
+        <ellipse cx="41" cy="27" rx="5.5" ry="4.5" fill="rgba(90,200,110,0.22)"/>
+
+        <!-- Left eye -->
+        <ellipse cx="39" cy="34" rx="5.5" ry="6.5" fill="#050e08"/>
+        <!-- Right eye -->
+        <ellipse cx="53" cy="34" rx="5.5" ry="6.5" fill="#050e08"/>
+        <!-- Eye glow left -->
+        <ellipse cx="37" cy="31.5" rx="2.5" ry="3" fill="#4bc8e8" opacity="0.85"/>
+        <ellipse cx="37" cy="31" rx="1" ry="1.2" fill="rgba(255,255,255,0.7)"/>
+        <!-- Eye glow right -->
+        <ellipse cx="51" cy="31.5" rx="2.5" ry="3" fill="#4bc8e8" opacity="0.85"/>
+        <ellipse cx="51" cy="31" rx="1" ry="1.2" fill="rgba(255,255,255,0.7)"/>
+
+        <!-- Nostrils -->
+        <path d="M43.5 41C44.2 42.2 47.8 42.2 48.5 41" stroke="#1a5030" stroke-width="1" stroke-linecap="round"/>
+        <!-- Mouth -->
+        <path d="M39.5 45C42 48 50 48 52.5 45" stroke="#4bc8e8" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+
+        <!-- Left antenna -->
+        <line x1="37" y1="20" x2="31" y2="10" stroke="#4ade80" stroke-width="1.6"/>
+        <circle cx="30" cy="9" r="2.8" fill="#c5f219"/>
+        <!-- Right antenna -->
+        <line x1="55" y1="20" x2="61" y2="10" stroke="#4ade80" stroke-width="1.6"/>
+        <circle cx="62" cy="9" r="2.8" fill="#c5f219"/>
+      </svg>
+    </div>
+
+  </div>
+
+  <div class="hero-inner container">
+
+    <!-- Massive title -->
+    <div class="title-wrap">
+      <div class="hero-badge hero-badge--animate">
+        <span class="badge-pulse"></span>
+        Open for projects
+      </div>
+
+      <h1 class="hero-title" aria-label="We Build The Future">
+        <span class="title-line line-1">
+          <span class="line-inner">
+            @for (l of line1Letters; track $index) {
+              <span class="letter" [class.space]="l.char === ' '">{{ l.char }}</span>
+            }
+          </span>
+        </span>
+        <span class="title-line line-2">
+          <span class="line-inner">
+            @for (l of line2Letters; track $index) {
+              <span class="letter glitch-letter" [class.space]="l.char === ' '" [attr.data-l]="l.char">{{ l.char }}</span>
+            }
+          </span>
+        </span>
+      </h1>
+
+      <p class="hero-typed hero-typed--animate">
+        {{ typedText() }}<span class="cursor">|</span>
+      </p>
+    </div>
+
+    <!-- Solar system viewing gap -->
+    <div class="solar-gap" aria-hidden="true"></div>
+
+    <!-- Stats + CTAs -->
+    <div class="hero-bottom hero-bottom--animate">
+      <div class="hero-stats">
+        <div class="hstat">
+          <span class="hstat-n">{{ statValues()[0] }}+</span>
+          <span class="hstat-l">Projects</span>
+        </div>
+        <div class="hstat-sep"></div>
+        <div class="hstat">
+          <span class="hstat-n">{{ statValues()[1] }}+</span>
+          <span class="hstat-l">Clients</span>
+        </div>
+        <div class="hstat-sep"></div>
+        <div class="hstat">
+          <span class="hstat-n">{{ statValues()[2] }}+</span>
+          <span class="hstat-l">Years</span>
+        </div>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="#portfolio" class="btn-primary">View Our Work</a>
+        <a href="#services" class="btn-outline">Explore Services</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Planet detail modal (click to open) -->
+  @if (selectedPlanet()) {
+    <div class="planet-modal" (click)="closePlanet()" role="dialog" aria-modal="true">
+      <div class="pm-inner" (click)="$event.stopPropagation()">
+
+        <!-- Close -->
+        <button class="pm-close" (click)="closePlanet()" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <!-- Left: planet visual -->
+        <div class="pm-visual">
+          <div class="pm-orb"
+               [style.--p1]="selectedPlanet()!.c[0]"
+               [style.--p2]="selectedPlanet()!.c[1]"
+               [style.--p3]="selectedPlanet()!.c[2]"
+               [style.--glow]="selectedPlanet()!.glow">
+            <!-- Saturn ring -->
+            @if (selectedPlanet()!.hasRings) {
+              <div class="pm-ring"></div>
+            }
+          </div>
+          <div class="pm-badge"
+               [style.color]="selectedPlanet()!.glow"
+               [style.border-color]="selectedPlanet()!.glow + '55'"
+               [style.background]="selectedPlanet()!.glow + '14'">
+            {{ selectedPlanet()!.techAbbr }}
+          </div>
+          <p class="pm-planet-label">{{ selectedPlanet()!.name }}</p>
+        </div>
+
+        <!-- Right: content -->
+        <div class="pm-content">
+          <div class="pm-tags">
+            <span class="pm-tag" [style.color]="selectedPlanet()!.glow"
+                  [style.border-color]="selectedPlanet()!.glow + '40'"
+                  [style.background]="selectedPlanet()!.glow + '10'">
+              {{ selectedPlanet()!.tech }}
+            </span>
+            <span class="pm-tag pm-tag-dim">{{ selectedPlanet()!.name }}</span>
+          </div>
+
+          <h2 class="pm-one-liner">{{ selectedPlanet()!.oneLiner }}</h2>
+
+          <div class="pm-section">
+            <h4 class="pm-section-title">About</h4>
+            <p class="pm-body">{{ selectedPlanet()!.techDesc }}</p>
+          </div>
+
+          <div class="pm-section">
+            <h4 class="pm-section-title">History</h4>
+            <p class="pm-body">{{ selectedPlanet()!.history }}</p>
+          </div>
+
+          <div class="pm-section">
+            <h4 class="pm-section-title">How we use it for clients</h4>
+            <p class="pm-body">{{ selectedPlanet()!.clientBenefit }}</p>
+
+            <div class="pm-used">
+              @for (proj of selectedPlanet()!.usedIn; track proj.name) {
+                <span class="pm-proj"
+                      [style.color]="selectedPlanet()!.glow"
+                      [style.border-color]="selectedPlanet()!.glow + '40'"
+                      [style.background]="selectedPlanet()!.glow + '0d'">
+                  <span class="pm-proj-type">{{ proj.type }}</span>
+                  {{ proj.name }}
+                </span>
+              }
+            </div>
+          </div>
+
+          <p class="pm-fact">
+            <svg viewBox="0 0 16 16" fill="none" width="13" height="13" style="flex-shrink:0">
+              <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M8 7v5M8 5v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            {{ selectedPlanet()!.fact }}
+          </p>
+        </div>
+
+      </div>
+    </div>
+  }
+
+  <!-- Planet tech tooltip -->
+  @if (hoveredPlanet()) {
+    <div class="planet-tooltip"
+         [style.left]="tooltipPos(hoveredPlanet()!).left"
+         [style.top]="tooltipPos(hoveredPlanet()!).top">
+      <div class="pt-header">
+        <div class="pt-badge" [style.color]="hoveredPlanet()!.color"
+             [style.border-color]="hoveredPlanet()!.color + '55'"
+             [style.background]="hoveredPlanet()!.color + '14'">
+          {{ hoveredPlanet()!.techAbbr }}
+        </div>
+        <div class="pt-title-group">
+          <span class="pt-planet-name">{{ hoveredPlanet()!.name }}</span>
+          <span class="pt-tech-name" [style.color]="hoveredPlanet()!.color">{{ hoveredPlanet()!.tech }}</span>
+        </div>
+      </div>
+      <p class="pt-desc">{{ hoveredPlanet()!.techDesc }}</p>
+      <div class="pt-used">
+        <span class="pt-used-label">Used in</span>
+        <div class="pt-projects">
+          @for (proj of hoveredPlanet()!.usedIn; track proj.name) {
+            <span class="pt-proj" [style.color]="hoveredPlanet()!.color"
+                  [style.border-color]="hoveredPlanet()!.color + '35'"
+                  [style.background]="hoveredPlanet()!.color + '0c'">
+              <span class="pt-proj-type">{{ proj.type }}</span>
+              {{ proj.name }}
+            </span>
+          }
+        </div>
+      </div>
+      <p class="pt-fact">{{ hoveredPlanet()!.fact }}</p>
+    </div>
+  }
+
+  <a href="#services" class="scroll-hint" aria-label="Scroll down">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+  </a>
+</section>

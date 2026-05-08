@@ -1,0 +1,106 @@
+<section class="location" id="location">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Find Us</p>
+      <h2 class="section-title">Our Location</h2>
+      <p class="section-subtitle">
+        Based in Pretoria, building for the world.
+      </p>
+    </div>
+
+    <div class="location-grid">
+      <div class="info-panel">
+        <div class="info-block">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div>
+            <h4 class="info-label">Street Address</h4>
+            <p class="info-value">{{ address }}</p>
+            <p class="info-sub">{{ suburb }}, {{ postalCode }}</p>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div>
+            <h4 class="info-label">Phone</h4>
+            <a [href]="'tel:' + phone" class="info-value info-link">{{ phone }}</a>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5"/>
+              <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div>
+            <h4 class="info-label">Email</h4>
+            <a [href]="'mailto:' + email" class="info-value info-link">{{ email }}</a>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+              <polyline points="12,6 12,12 16,14" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div>
+            <h4 class="info-label">Office Hours</h4>
+            <p class="info-value">Mon – Fri: 08:00 – 17:00</p>
+            <p class="info-sub">Sat: 09:00 – 11:00</p>
+            <p class="info-sub">Sun: 09:00 – 11:00</p>
+            <p class="info-sub">Closed on Public Holidays</p>
+          </div>
+        </div>
+
+        <a href="#contact" class="btn-primary contact-cta">
+          Get In Touch
+          <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="map-container">
+        <div class="map-frame">
+          <iframe
+            [src]="mapUrl"
+            width="100%"
+            height="100%"
+            frameborder="0"
+            scrolling="no"
+            marginheight="0"
+            marginwidth="0"
+            title="AppSoLoot Office Location"
+            loading="lazy"
+          ></iframe>
+          <div class="map-overlay"></div>
+          <div class="map-pin">
+            <div class="pin-dot"></div>
+            <div class="pin-pulse"></div>
+            <div class="pin-label">AppSoLoot HQ</div>
+          </div>
+        </div>
+        <div class="map-address-tag">
+          <svg viewBox="0 0 16 16" fill="none" width="14" height="14">
+            <path d="M8 1C5.24 1 3 3.24 3 6c0 3.93 5 9 5 9s5-5.07 5-9c0-2.76-2.24-5-5-5z" fill="currentColor" opacity="0.8"/>
+            <circle cx="8" cy="6" r="1.5" fill="white"/>
+          </svg>
+          {{ address }}, {{ suburb }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

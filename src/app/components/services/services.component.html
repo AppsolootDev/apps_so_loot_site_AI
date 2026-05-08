@@ -1,0 +1,132 @@
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">What We Do</p>
+      <h2 class="section-title">Our Core Services</h2>
+      <p class="section-subtitle">Four deep specializations — AI, Web, Mobile, Design. All built to perform.</p>
+    </div>
+
+    <div class="slider-shell">
+      <!-- Tab pills -->
+      <div class="svc-tabs">
+        @for (svc of services; track svc.id) {
+          <button
+            class="svc-tab"
+            [class.active]="current() === svc.id"
+            [style.border-color]="current() === svc.id ? svc.color + '60' : ''"
+            [style.color]="current() === svc.id ? svc.color : ''"
+            [style.background]="current() === svc.id ? (svc.color + '12') : ''"
+            (click)="selectAndReset(svc.id)"
+          >
+            @if (svc.icon === 'ai') {
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><circle cx="8" cy="4" r="2" stroke="currentColor" stroke-width="1.2"/><circle cx="2" cy="12" r="2" stroke="currentColor" stroke-width="1.2"/><circle cx="14" cy="12" r="2" stroke="currentColor" stroke-width="1.2"/><line x1="8" y1="6" x2="2" y2="10" stroke="currentColor" stroke-width="1"/><line x1="8" y1="6" x2="14" y2="10" stroke="currentColor" stroke-width="1"/></svg>
+            }
+            @if (svc.icon === 'angular') {
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M8 1L1 3.5l1 10 6 2.5 6-2.5 1-10L8 1Z" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M5 12L8 5L11 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><line x1="6" y1="9.5" x2="10" y2="9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            }
+            @if (svc.icon === 'flutter') {
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8L9 2H14L8 9L3 8Z" fill="currentColor" opacity="0.3"/><path d="M3 8L9 2H14L8 9" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M8 9L12 13L9 16L3 10L8 9Z" fill="currentColor" opacity="0.55"/><path d="M8 9L12 13L9 16L3 10Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            }
+            @if (svc.icon === 'figma') {
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><rect x="3" y="1" width="5" height="5" rx="2.5" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="2.5" stroke="currentColor" stroke-width="1.2"/><rect x="3" y="6" width="5" height="5" stroke="currentColor" stroke-width="1.2"/><circle cx="10.5" cy="8.5" r="2.5" stroke="currentColor" stroke-width="1.2"/><rect x="3" y="11" width="5" height="4" rx="2.5" stroke="currentColor" stroke-width="1.2"/></svg>
+            }
+            {{ svc.name }}
+          </button>
+        }
+      </div>
+
+      <!-- Perspective slider -->
+      <div class="svc-stage" [style.background]="active.image">
+        <div class="svc-card" [class.show]="slideVisible()">
+          <!-- Visual panel -->
+          <div class="svc-visual" [style.border-color]="active.color + '25'">
+            <div class="visual-icon-wrap" [style.background]="active.color + '15'" [style.border-color]="active.color + '35'">
+              @if (active.icon === 'ai') {
+                <svg viewBox="0 0 64 64" fill="none" [style.color]="active.color" width="64" height="64">
+                  <circle cx="32" cy="12" r="7" stroke="currentColor" stroke-width="1.8"/>
+                  <circle cx="9" cy="48" r="7" stroke="currentColor" stroke-width="1.8"/>
+                  <circle cx="55" cy="48" r="7" stroke="currentColor" stroke-width="1.8"/>
+                  <line x1="32" y1="19" x2="9" y2="41" stroke="currentColor" stroke-width="1.5"/>
+                  <line x1="32" y1="19" x2="55" y2="41" stroke="currentColor" stroke-width="1.5"/>
+                  <line x1="9" y1="48" x2="55" y2="48" stroke="currentColor" stroke-width="1.5" stroke-dasharray="5 3"/>
+                  <circle cx="32" cy="32" r="4" fill="currentColor" opacity="0.4"/>
+                  <circle cx="20" cy="25" r="2" fill="currentColor" opacity="0.35"/>
+                  <circle cx="44" cy="25" r="2" fill="currentColor" opacity="0.35"/>
+                </svg>
+              }
+              @if (active.icon === 'angular') {
+                <svg viewBox="0 0 64 64" fill="none" [style.color]="active.color" width="64" height="64">
+                  <path d="M32 4L4 14l4 36 24 10 24-10 4-36L32 4Z" stroke="currentColor" stroke-width="1.8" fill="none"/>
+                  <path d="M19 46L32 16L45 46" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M23 37H41" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              }
+              @if (active.icon === 'flutter') {
+                <svg viewBox="0 0 64 64" fill="none" [style.color]="active.color" width="64" height="64">
+                  <path d="M14 32L29 14H50L29 35L14 32Z" fill="currentColor" opacity="0.2"/>
+                  <path d="M14 32L29 14H50L29 35" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <path d="M29 35L44 50L35 58L14 40L29 35Z" fill="currentColor" opacity="0.5"/>
+                  <path d="M29 35L44 50L35 58L14 40Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <line x1="44" y1="50" x2="54" y2="40" stroke="currentColor" stroke-width="1.5" opacity="0.35" stroke-dasharray="4 3"/>
+                </svg>
+              }
+              @if (active.icon === 'figma') {
+                <svg viewBox="0 0 64 64" fill="none" [style.color]="active.color" width="64" height="64">
+                  <rect x="12" y="6" width="20" height="20" rx="10" stroke="currentColor" stroke-width="1.8"/>
+                  <rect x="32" y="6" width="20" height="20" rx="10" stroke="currentColor" stroke-width="1.8"/>
+                  <rect x="12" y="26" width="20" height="20" stroke="currentColor" stroke-width="1.8"/>
+                  <circle cx="42" cy="36" r="10" stroke="currentColor" stroke-width="1.8"/>
+                  <rect x="12" y="46" width="20" height="12" rx="10" stroke="currentColor" stroke-width="1.8"/>
+                  <line x1="32" y1="6" x2="32" y2="46" stroke="currentColor" stroke-width="1.8"/>
+                  <line x1="12" y1="26" x2="32" y2="26" stroke="currentColor" stroke-width="1.8"/>
+                  <line x1="12" y1="46" x2="32" y2="46" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+              }
+            </div>
+
+            <div class="tech-stack">
+              @for (t of active.tech; track t) {
+                <span class="tech-tag">{{ t }}</span>
+              }
+            </div>
+
+            <!-- Progress bar -->
+            <div class="slide-progress">
+              <div class="slide-progress-fill" [style.background]="active.color" [style.animation-duration]="'5s'"></div>
+            </div>
+          </div>
+
+          <!-- Content panel -->
+          <div class="svc-content">
+            <span class="svc-tagline" [style.color]="active.color">{{ active.tagline }}</span>
+            <h3 class="svc-name">{{ active.name }}</h3>
+            <p class="svc-desc">{{ active.description }}</p>
+
+            <ul class="svc-features">
+              @for (f of active.features; track f) {
+                <li class="svc-feat">
+                  <span class="feat-check" [style.color]="active.color">
+                    <svg viewBox="0 0 12 12" fill="none" width="11" height="11"><path d="M2 6L5 9L10 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  {{ f }}
+                </li>
+              }
+            </ul>
+
+            <a href="#contact" class="svc-cta" [style.background]="active.color">
+              Start This Project
+              <svg viewBox="0 0 16 16" fill="none" width="14" height="14"><path d="M3 8H13M9 4L13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Slide counter -->
+        <div class="slide-counter">
+          @for (svc of services; track svc.id) {
+            <button class="sc-dot" [class.active]="current() === svc.id" [style.background]="current() === svc.id ? svc.color : ''" (click)="selectAndReset(svc.id)" [attr.aria-label]="svc.name"></button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

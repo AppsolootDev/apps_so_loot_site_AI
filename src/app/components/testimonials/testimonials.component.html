@@ -1,0 +1,40 @@
+<section class="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Client Voices</p>
+      <h2 class="section-title">What Our Clients Say</h2>
+      <p class="section-subtitle">
+        Real results from real partnerships. Here's what our clients say about working with AppSoLoot.
+      </p>
+    </div>
+
+    <div class="testimonials-grid">
+      @for (t of testimonials; track t.id) {
+        <div class="testimonial-card">
+          <div class="card-top">
+            <div class="stars">
+              @for (star of stars(t.rating); track star) {
+                <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14" class="star">
+                  <path d="M8 1.5l1.75 3.55 3.9.57-2.82 2.75.66 3.88L8 10.35l-3.49 1.9.66-3.88L2.35 5.62l3.9-.57L8 1.5z"/>
+                </svg>
+              }
+            </div>
+            <div class="quote-mark">"</div>
+          </div>
+
+          <blockquote class="quote-text">{{ t.quote }}</blockquote>
+
+          <div class="author-row">
+            <div class="avatar" [style.background]="t.avatarColor + '20'" [style.border-color]="t.avatarColor + '40'" [style.color]="t.avatarColor">
+              {{ t.initials }}
+            </div>
+            <div class="author-info">
+              <span class="author-name">{{ t.author }}</span>
+              <span class="author-role">{{ t.role }}, <strong>{{ t.company }}</strong></span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

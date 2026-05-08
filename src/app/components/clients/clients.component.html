@@ -1,0 +1,118 @@
+<section class="clients" id="clients" #sectionEl>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="clients-head">
+      <p class="section-label">Client Portfolio</p>
+
+      <!-- Title: each char slides in from top -->
+      <h2 class="clients-title">
+        @for (item of titleChars; track item.i) {
+          @if (item.char === ' ') {
+            <span class="tc-space">&nbsp;</span>
+          } @else {
+            <span class="tc-wrap"><span class="tci">{{ item.char }}</span></span>
+          }
+        }
+      </h2>
+
+      <p class="section-subtitle">
+        Companies that chose AppSoLoot to power their digital transformation.
+      </p>
+    </div>
+
+    <!-- Slider shell -->
+    <div class="slider-shell">
+
+      <!-- Prev arrow -->
+      <button class="arrow arrow-prev" (click)="prev()" aria-label="Previous client">
+        <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <!-- Next arrow -->
+      <button class="arrow arrow-next" (click)="next()" aria-label="Next client">
+        <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <!-- Viewport -->
+      <div class="slider-viewport">
+        <div class="slider-track" #trackEl>
+
+          @for (client of clients; track client.domain; let i = $index) {
+            <article class="client-card" [style.--acc]="client.color">
+
+              <!-- Ambient glow -->
+              <div class="card-glow" [style.background]="client.color + '18'"></div>
+
+              <!-- New: Space background elements for each client -->
+              <div class="client-space-elements">
+                <div class="client-stars"></div>
+                <div class="client-nebulae"></div>
+                <div class="client-constellations"></div>
+              </div>
+
+              <!-- Top: industry tag -->
+              <span class="card-industry" [style.color]="client.color"
+                    [style.border-color]="client.color + '35'"
+                    [style.background]="client.color + '0e'">
+                {{ client.industry }}
+              </span>
+
+              <!-- Client name -->
+              <h3 class="card-name">{{ client.name }}</h3>
+
+              <!-- Description -->
+              <p class="card-desc">{{ client.description }}</p>
+
+              <!-- Footer row: domain left, logo right -->
+              <div class="card-foot">
+                <a [href]="client.url" target="_blank" rel="noopener noreferrer"
+                   class="card-domain" [style.color]="client.color">
+                  {{ client.domain }}
+                  <svg viewBox="0 0 16 16" fill="none" width="11" height="11">
+                    <path d="M3 13L13 3M13 3H7M13 3V9" stroke="currentColor"
+                          stroke-width="1.8" stroke-linecap="round"/>
+                  </svg>
+                </a>
+
+                <!-- Logo or monogram -->
+                <div class="card-logo">
+                  @if (client.logo) {
+                    <img [src]="client.logo" [alt]="client.name" class="logo-img" />
+                  } @else {
+                    <div class="logo-mono"
+                         [style.color]="client.color"
+                         [style.border-color]="client.color + '45'"
+                         [style.background]="client.color + '12'">
+                      {{ mono(client.name) }}
+                    </div>
+                  }
+                </div>
+              </div>
+
+            </article>
+          }
+
+        </div>
+      </div>
+
+      <!-- Dots -->
+      <div class="slider-dots">
+        @for (d of dotRange(); track d) {
+          <button class="dot" [class.dot-on]="currentIndex() === d"
+                  [style.background]="currentIndex() === d ? clients[d].color : ''"
+                  (click)="dot(d)"
+                  [attr.aria-label]="'Slide ' + (d + 1)">
+          </button>
+        }
+      </div>
+
+    </div>
+  </div>
+</section>

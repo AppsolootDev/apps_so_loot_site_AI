@@ -1,0 +1,65 @@
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left">
+        <p class="section-label">Who We Are</p>
+        <h2 class="section-title">Built by Builders,<br>for Visionaries</h2>
+        <p class="about-lead">
+          AppSoLoot is a Pretoria-based digital agency specializing in AI, web, mobile, and design. We partner with ambitious startups, SMEs, and enterprises to build technology that makes a meaningful impact.
+        </p>
+        <p class="about-body">
+          Founded on the belief that great software is a fusion of engineering rigor and design thinking, our team brings deep expertise across four interconnected disciplines. From an AI model that streamlines operations to a Flutter app that delights users — we build with intention, precision, and craft.
+        </p>
+
+        <div class="values-list">
+          @for (value of values; track value.title) {
+            <div class="value-item">
+              <span class="value-icon">{{ value.icon }}</span>
+              <div>
+                <h4 class="value-title">{{ value.title }}</h4>
+                <p class="value-desc">{{ value.desc }}</p>
+              </div>
+            </div>
+          }
+        </div>
+
+        <a href="#contact" class="btn-primary" style="width:fit-content; margin-top: 8px;">
+          Start a Project
+          <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="about-right">
+        <div class="stats-grid">
+          @for (stat of stats; track stat.label) {
+            <div class="stat-card">
+              <span class="stat-value">{{ stat.value }}</span>
+              <span class="stat-label">{{ stat.label }}</span>
+            </div>
+          }
+        </div>
+
+        <div class="visual-card">
+          <div class="visual-inner">
+            <div class="visual-ring ring-1"></div>
+            <div class="visual-ring ring-2"></div>
+            <div class="visual-ring ring-3"></div>
+            <div class="visual-core">
+              <svg viewBox="0 0 24 24" fill="none" class="core-icon">
+                <polygon points="12,2 22,7 22,17 12,22 2,17 2,7" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <polygon points="12,6 18,9.5 18,14.5 12,18 6,14.5 6,9.5" fill="currentColor" opacity="0.2"/>
+                <circle cx="12" cy="12" r="3" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="orbit-dot dot-1"></div>
+            <div class="orbit-dot dot-2"></div>
+            <div class="orbit-dot dot-3"></div>
+          </div>
+          <p class="visual-caption">AppSoLoot builds at the intersection of AI, code, and design.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
