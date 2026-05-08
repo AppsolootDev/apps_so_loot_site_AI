@@ -1,0 +1,17 @@
+:host { display: block; }
+main { overflow: hidden; }
+
+/* ─── Section scroll reveal ────────────────────────────── */
+
+section:not(#home) {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity  0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+section:not(#home).in-view {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -1,59 +1,55 @@
-# AppSoLoot
+I would liek the # Lociware Agency Website
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.10.
+Built with [Angular CLI](https://github.com/angular/angular-cli) version 21.2.10.
+
+## Site Structure
+
+| Section | Highlights |
+|---|---|
+| **Navbar** | Sticky glass effect on scroll, mobile hamburger with animated X |
+| **Hero** | Animated blob background + grid overlay, auto-advancing tech slider (AI → Angular → Flutter → Figma) with SVG icons, live dot nav |
+| **Services** | 4 glassmorphism cards with inline SVGs, feature lists, tech chips, hover lime-accent top border |
+| **About** | Company story, orbital animated visual with revolving dots, stats grid |
+| **Portfolio** | Zarbiter · Chozen One Gym · Patron Assist — large horizontal cards with project details |
+| **Testimonials** | 3 dummy client quotes (Sipho Mokoena, Natasha Williams, James Hlongwane) with star ratings |
+| **Clients 3D** | CSS `preserve-3d` rotating cylinder carousel — zarbiter.co.za, chozenonegym.com, patron-assist.co.za |
+| **Map** | OpenStreetMap iframe with `filter: grayscale→invert→sepia→hue-rotate(55deg)` for black+lime look, lime pulsing pin |
+| **Footer** | X/Twitter auto-scroll marquee + Instagram reverse-scroll marquee, all nav columns, copyright |
+
+**Design system**: Lime `#c5f219` accent, `#06070A` dark background, Orbitron headings, Inter body, glassmorphism cards.
+
+**API service** at `src/app/services/lociware-api.service.ts` — update `baseUrl` from `https://api.lociware.co.za` to your real endpoint.
 
 ## Development server
 
-To start a local development server, run:
-
 ```bash
-ng serve
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Runs on **http://localhost:5300/**. The app reloads automatically on file changes.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Build
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Artifacts are output to the `dist/` directory. Production build is optimised for performance.
+
+## Code scaffolding
+
+```bash
+ng generate component component-name
+```
 
 ## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Uses [Vitest](https://vitest.dev/).
 
 ## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+[Angular CLI Overview and Command Reference](https://angular.dev/tools/cli)
