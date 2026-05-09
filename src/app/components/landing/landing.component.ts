@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { HeroComponent } from '../hero/hero.component';
+import {HeroComponent} from '../hero/hero.component';
 import { ServicesComponent } from '../services/services.component';
 import { AboutComponent } from '../about/about.component';
 import { PortfolioComponent } from '../portfolio/portfolio.component';
