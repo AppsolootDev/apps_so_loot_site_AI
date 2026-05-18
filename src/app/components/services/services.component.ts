@@ -1,4 +1,6 @@
 import { Component, signal, OnInit, OnDestroy } from '@angular/core';
+import { TitleAnimationDirective } from '../../directives/title-animation.directive'; // Import the new directive
+import { CommonModule } from '@angular/common'; // Import CommonModule for @for
 
 interface Service {
   id: number;
@@ -15,7 +17,7 @@ interface Service {
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, TitleAnimationDirective], // Add CommonModule and the directive here
   templateUrl: './services.component.html',
   styleUrl: './services.component.css'
 })
@@ -71,6 +73,9 @@ export class ServicesComponent implements OnInit, OnDestroy {
       image: 'linear-gradient(135deg, #1a0a06 0%, #120806 50%, #06070a 100%)'
     }
   ];
+
+  // Add titleChars for animation
+  readonly titleChars = 'Our Core Services'.split('').map((char, i) => ({ char, i }));
 
   ngOnInit() {
     this.intervalId = setInterval(() => this.advance(), 5000);

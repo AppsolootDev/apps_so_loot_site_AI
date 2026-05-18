@@ -2,7 +2,15 @@
   <div class="container">
     <div class="section-header">
       <p class="section-label">Our Work</p>
-      <h2 class="section-title">Featured Projects</h2>
+      <h2 class="section-title" appTitleAnimation>
+        @for (item of titleChars; track item.i) {
+          @if (item.char === ' ') {
+            <span class="char-space">&nbsp;</span>
+          } @else {
+            <span class="char-wrap"><span class="char">{{ item.char }}</span></span>
+          }
+        }
+      </h2>
       <p class="section-subtitle">
         A selection of real-world products we've shipped — each one a testament to what happens when precision meets purpose.
       </p>

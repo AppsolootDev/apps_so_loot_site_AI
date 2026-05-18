@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-const LOCIWARE_API_URL = 'https://github.com/AppsolootDev/Lociware/tree/flut/api';
+const LOCIWARE_API_URL = 'https://github.com/AppsolootDev/Lociware/tree/flut/api/index.js';
 
 @Component({
   selector: 'app-lociware-api-redirect',
@@ -17,7 +17,7 @@ const LOCIWARE_API_URL = 'https://github.com/AppsolootDev/Lociware/tree/flut/api
       <p style="font-size:0.9rem;color:#7ca8c4">Redirecting to Lociware API repository…</p>
       <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
     </div>
-  `,
+  `
 })
 export class LociwareApiRedirectComponent implements OnInit {
   ngOnInit() {

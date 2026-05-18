@@ -55,6 +55,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
+  position: relative; /* Added for indicator positioning */
 }
 
 .nav-link {
@@ -65,11 +66,28 @@
   border-radius: 8px;
   transition: all var(--transition);
   letter-spacing: 0.01em;
+  position: relative; /* Needed for z-index context if indicator is below */
+  z-index: 1; /* Ensure links are above indicator */
 }
 
 .nav-link:hover {
   color: var(--text);
   background: rgba(255,255,255,0.06);
+}
+
+.nav-link.active {
+  color: var(--lime); /* Highlight active link text */
+}
+
+.nav-indicator {
+  position: absolute;
+  bottom: 0; /* Position at the bottom of nav-links */
+  height: 2px; /* Height of the indicator line */
+  background-color: var(--lime); /* Color of the indicator */
+  border-radius: 1px;
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  opacity: 0; /* Hidden by default */
+  z-index: 0; /* Ensure indicator is below links */
 }
 
 .nav-cta {
@@ -146,4 +164,8 @@
 
   .nav-link { padding: 14px 8px; font-size: 1rem; }
   .nav-cta { margin: 8px 0 0; text-align: center; padding: 14px; justify-content: center; }
+
+  .nav-indicator { /* Hide indicator on mobile menu */
+    display: none;
+  }
 }

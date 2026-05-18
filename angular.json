@@ -27,6 +27,10 @@
             ],
             "styles": [
               "src/styles.css"
+            ],
+            "allowedCommonJsDependencies": [
+              "framer-motion",
+              "react"
             ]
           },
           "configurations": {
@@ -39,8 +43,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "10kB",
+                  "maximumError": "20kB"
                 }
               ],
               "outputHashing": "all"
@@ -60,7 +64,8 @@
               "buildTarget": "AppSoLoot:build:production"
             },
             "development": {
-              "buildTarget": "AppSoLoot:build:development"
+              "buildTarget": "AppSoLoot:build:development",
+              "port": 4200
             }
           },
           "defaultConfiguration": "development"

@@ -87,8 +87,8 @@
 .space-chars {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  pointer-events: none;
+  z-index: 3; /* Increased z-index */
+  /* Removed pointer-events: none; from here */
 }
 
 /* Rocket */
@@ -98,6 +98,8 @@
   left: 6%;
   animation: rocketFly 22s ease-in-out infinite;
   transform-origin: center;
+  pointer-events: auto; /* Added this */
+  cursor: pointer; /* Added this for visual feedback */
 }
 
 .char-rocket svg {
@@ -139,6 +141,8 @@
   top: 28%;
   right: 5%;
   animation: astroFloat 9s ease-in-out infinite;
+  pointer-events: auto; /* Added this */
+  cursor: pointer; /* Added this for visual feedback */
 }
 
 .char-astronaut svg {
@@ -160,6 +164,8 @@
   top: 7%;
   right: 10%;
   animation: ufoHover 6s ease-in-out infinite;
+  pointer-events: auto; /* Added this */
+  cursor: pointer; /* Added this for visual feedback */
 }
 
 .char-alien-ufo svg {
@@ -188,7 +194,7 @@
 
 .ufo-label-llm,
 .ufo-label-ai {
-  font-family: var(--font-display);
+  font-family: var(--font-body); /* Changed to secondary font */
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -240,7 +246,7 @@
 .hero .space-chars,
 .hero .hero-inner,
 .hero .scroll-hint {
-  transition: opacity 1.2s cubic-bezier(0.22,1,0.36,1);
+  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hero.intro-active .hero-bg,
@@ -283,6 +289,7 @@
   width: fit-content;
   margin: 0 auto;
   letter-spacing: 0.08em;
+  font-family: var(--font-body); /* Changed to secondary font */
 }
 
 .badge-pulse {
@@ -298,11 +305,11 @@
 }
 
 .hero-title {
-  font-family: var(--font-display);
+  font-family: var(--font-display); /* Primary font for titles */
   font-size: clamp(1.35rem, 2.8vw, 2.4rem);
   font-weight: 900;
   line-height: 0.92;
-  letter-spacing: -0.04em;
+  letter-spacing: 0.05em; /* Adjusted for Spiderman font */
   text-align: center;
   margin: 0;
 }
@@ -411,6 +418,7 @@
   min-height: 2em;
   max-width: 640px;
   margin: 0 auto;
+  font-family: var(--font-body); /* Changed to secondary font */
 }
 
 .cursor {
@@ -443,7 +451,7 @@
 .hstat { display: flex; flex-direction: column; gap: 2px; }
 
 .hstat-n {
-  font-family: var(--font-display);
+  font-family: var(--font-display); /* Primary font for titles */
   font-size: 2rem;
   font-weight: 800;
   color: var(--lime);
@@ -456,6 +464,7 @@
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  font-family: var(--font-body); /* Changed to secondary font */
 }
 
 .hstat-sep { width: 1px; height: 40px; background: var(--border); }
@@ -541,7 +550,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
+  font-family: var(--font-body); /* Changed to secondary font */
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -554,7 +563,7 @@
 }
 
 .pt-planet-name {
-  font-family: var(--font-display);
+  font-family: var(--font-display); /* Primary font for titles */
   font-size: 1rem;
   font-weight: 800;
   color: var(--text);
@@ -563,7 +572,7 @@
 }
 
 .pt-tech-name {
-  font-family: var(--font-display);
+  font-family: var(--font-body); /* Changed to secondary font */
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -574,6 +583,7 @@
   font-size: 0.8rem;
   color: var(--text-muted);
   line-height: 1.65;
+  font-family: var(--font-body); /* Changed to secondary font */
 }
 
 .pt-used {
@@ -583,7 +593,7 @@
 }
 
 .pt-used-label {
-  font-family: var(--font-display);
+  font-family: var(--font-body); /* Changed to secondary font */
   font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: 0.22em;
@@ -602,12 +612,13 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 100px;
   border: 1px solid;
   letter-spacing: 0.01em;
+  font-family: var(--font-body); /* Changed to secondary font */
 }
 
 .pt-proj-type {
@@ -615,7 +626,8 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  opacity: 0.7;
+  opacity: 0.65;
+  font-family: var(--font-body); /* Changed to secondary font */
 }
 
 .pt-fact {
@@ -624,8 +636,11 @@
   line-height: 1.55;
   font-style: italic;
   opacity: 0.6;
-  border-top: 1px solid rgba(75,200,232,0.08);
-  padding-top: 10px;
+  border-top: 1px solid rgba(75,200,232,0.07);
+  padding-top: 16px;
+  margin-top: auto;
+  animation: fadeSlideUp 0.4s cubic-bezier(0.22,1,0.36,1) 0.4s both;
+  font-family: var(--font-body); /* Changed to secondary font */
 }
 
 /* ─── Planet detail modal ────────────────────────────────────────── */
@@ -668,7 +683,7 @@
 
 @keyframes pmSlideUp {
   from { opacity: 0; transform: translateY(40px) scale(0.96); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  to   { transform: translateY(0) scale(1); }
 }
 
 /* Close button */
@@ -728,17 +743,6 @@
   50%     { transform: translateY(-12px) rotate(3deg); }
 }
 
-/* Saturn ring on the orb */
-.pm-ring {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 260px; height: 64px;
-  transform: translate(-50%, -50%) rotateX(70deg);
-  border-radius: 50%;
-  border: 14px solid rgba(200,180,130,0.45);
-  pointer-events: none;
-}
-
 /* Tech badge below orb */
 .pm-badge {
   width: 58px; height: 58px;
@@ -747,15 +751,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
+  font-family: var(--font-body); /* Changed to secondary font */
   font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   animation: fadeSlideUp 0.4s cubic-bezier(0.22,1,0.36,1) 0.3s both;
 }
 
+.pm-badge-icon {
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Adjust size as needed */
+}
+
 .pm-planet-label {
-  font-family: var(--font-display);
+  font-family: var(--font-body); /* Changed to secondary font */
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.22em;
@@ -763,6 +772,72 @@
   color: var(--text-muted);
   animation: fadeSlideUp 0.4s cubic-bezier(0.22,1,0.36,1) 0.4s both;
 }
+
+/* Moons and Day Length Layout */
+.pm-moons-day-layout {
+  display: flex;
+  flex-direction: row; /* Arrange horizontally */
+  justify-content: center; /* Center items */
+  gap: 20px; /* Space between items */
+  margin-top: 20px;
+}
+
+.pm-detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.pm-detail-icon {
+  width: 30px; /* Smaller icons */
+  height: 30px;
+  opacity: 0.7;
+}
+
+
+/* Chemical Composition Layout */
+.pm-composition-section {
+  margin-top: 20px;
+}
+
+.pm-composition-list {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping */
+  justify-content: center; /* Center items */
+  gap: 10px; /* Space between elements */
+}
+
+.pm-composition-tile {
+  padding: 5px 8px; /* Adjusted padding */
+  display: flex;
+  flex-direction: column; /* Keep elements within tile vertical */
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: rgba(0,0,0,0.2);
+  min-width: 60px; /* Ensure consistent width */
+  font-family: var(--font-body);
+}
+
+.pm-element-number {
+  font-size: 0.7em;
+  opacity: 0.7;
+}
+
+.pm-element-symbol {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.pm-element-weight {
+  font-size: 0.7em;
+  opacity: 0.7;
+}
+
 
 /* Right column: content */
 .pm-content {
@@ -782,7 +857,7 @@
 }
 
 .pm-tag {
-  font-family: var(--font-display);
+  font-family: var(--font-body); /* Changed to secondary font */
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.18em;
@@ -799,7 +874,7 @@
 }
 
 .pm-one-liner {
-  font-family: var(--font-display);
+  font-family: var(--font-display); /* Primary font for titles */
   font-size: clamp(1.1rem, 2vw, 1.5rem);
   font-weight: 800;
   color: var(--text);
@@ -819,7 +894,7 @@
 .pm-section + .pm-section + .pm-section { animation-delay: 0.35s; }
 
 .pm-section-title {
-  font-family: var(--font-display);
+  font-family: var(--font-body); /* Changed to secondary font */
   font-size: 0.58rem;
   font-weight: 700;
   letter-spacing: 0.22em;
@@ -832,6 +907,7 @@
   font-size: 0.875rem;
   color: var(--text-muted);
   line-height: 1.78;
+  font-family: var(--font-body); /* Changed to secondary font */
 }
 
 .pm-used {
@@ -851,6 +927,7 @@
   border-radius: 100px;
   border: 1px solid;
   letter-spacing: 0.01em;
+  font-family: var(--font-body); /* Changed to secondary font */
 }
 
 .pm-proj-type {
@@ -859,6 +936,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   opacity: 0.65;
+  font-family: var(--font-body); /* Changed to secondary font */
 }
 
 .pm-fact {
@@ -874,6 +952,135 @@
   padding-top: 16px;
   margin-top: auto;
   animation: fadeSlideUp 0.4s cubic-bezier(0.22,1,0.36,1) 0.4s both;
+  font-family: var(--font-body); /* Changed to secondary font */
+}
+
+/* ─── Team Modal ────────────────────────────────────────── */
+.team-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(4, 9, 18, 0.88);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+  animation: pmFadeIn 0.3s ease forwards;
+  cursor: pointer;
+}
+
+.tm-inner {
+  width: 100%;
+  max-width: 800px;
+  background: rgba(8, 16, 32, 0.96);
+  border: 1px solid rgba(74,222,128,0.12);
+  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  animation: pmSlideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.tm-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+
+.tm-close:hover {
+  background: rgba(255,255,255,0.12);
+  color: var(--text);
+}
+
+.tm-content {
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.tm-title {
+  font-family: var(--font-display); /* Primary font for titles */
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 800;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tm-members {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.tm-member {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(74,222,128,0.1);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tm-member-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tm-member-emoji {
+  font-size: 1.8rem;
+}
+
+.tm-member-name {
+  font-family: var(--font-display); /* Primary font for titles */
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.tm-member-role {
+  font-size: 0.85rem;
+  color: var(--lime);
+  font-weight: 500;
+  font-family: var(--font-body); /* Changed to secondary font */
+}
+
+.tm-member-bio {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-family: var(--font-body); /* Changed to secondary font */
+}
+
+.tm-member-linkedin {
+  font-size: 0.8rem;
+  color: var(--blue);
+  text-decoration: none;
+  margin-top: 10px;
+  font-family: var(--font-body); /* Changed to secondary font */
+}
+
+.tm-member-linkedin:hover {
+  text-decoration: underline;
 }
 
 /* Responsive */
@@ -885,6 +1092,7 @@
   .pm-visual { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 40px; }
   .pm-orb { width: 140px; height: 140px; }
   .pm-content { padding: 32px 28px; }
+  .tm-members { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 600px) {
@@ -897,4 +1105,7 @@
   .pm-inner { border-radius: 20px; }
   .pm-content { padding: 24px 20px; }
   .pm-one-liner { font-size: 1rem; }
+  .team-modal { padding: 12px; }
+  .tm-inner { border-radius: 20px; }
+  .tm-content { padding: 24px 20px; }
 }

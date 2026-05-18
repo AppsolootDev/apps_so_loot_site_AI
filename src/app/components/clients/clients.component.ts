@@ -2,7 +2,7 @@ import {
   Component, signal, OnInit, OnDestroy, AfterViewInit,
   ElementRef, ViewChild, HostListener, NgZone
 } from '@angular/core';
-import { animate, stagger } from 'framer-motion';
+import { TitleAnimationDirective } from '../../directives/title-animation.directive'; // Import the new directive
 
 interface Client {
   name: string;
@@ -17,17 +17,17 @@ interface Client {
 @Component({
   selector: 'app-clients',
   standalone: true,
-  imports: [],
+  imports: [TitleAnimationDirective], // Add the directive here
   templateUrl: './clients.component.html',
   styleUrl: './clients.component.css'
 })
 export class ClientsComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('trackEl') trackRef!: ElementRef<HTMLElement>;
-  @ViewChild('sectionEl') sectionRef!: ElementRef<HTMLElement>;
+  @ViewChild('sectionEl') sectionRef!: ElementRef<HTMLElement>; // Keep for other potential observers
 
   currentIndex = signal(0);
   private vc = 2;
-  private titleAnimated = false;
+  // private titleAnimated = false; // No longer needed, directive handles it
   private intervalId: ReturnType<typeof setInterval> | null = null;
 
   readonly clients: Client[] = [
@@ -88,17 +88,8 @@ export class ClientsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !this.titleAnimated) {
-          this.titleAnimated = true;
-          this.runTitleAnim();
-          io.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    io.observe(this.sectionRef.nativeElement);
+    // The IntersectionObserver for title animation is now handled by the directive
+    // If sectionRef is used for other purposes, keep it. Otherwise, it can be removed.
   }
 
   ngOnDestroy() {
@@ -118,16 +109,17 @@ export class ClientsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private updateVc() { this.vc = window.innerWidth < 768 ? 1 : 2; }
 
-  private runTitleAnim() {
-    const chars = this.sectionRef.nativeElement.querySelectorAll('.tci');
-    if (chars.length) {
-      animate(
-        chars,
-        { transform: ['translateY(-110%)', 'translateY(0%)'], opacity: [0, 1] },
-        { delay: stagger(0.04), duration: 0.5, ease: [0.22, 1, 0.36, 1] }
-      );
-    }
-  }
+  // runTitleAnim() is no longer needed as the directive handles it
+  // private runTitleAnim() {
+  //   const chars = this.sectionRef.nativeElement.querySelectorAll('.tci');
+  //   if (chars.length) {
+  //     animate(
+  //       chars,
+  //       { transform: ['translateY(-110%)', 'translateY(0%)'], opacity: [0, 1] },
+  //       { delay: stagger(0.04), duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+  //     );
+  //   }
+  // }
 
   private startAutoPlay() {
     this.intervalId = setInterval(() => {
@@ -163,16 +155,22 @@ export class ClientsComponent implements OnInit, OnDestroy, AfterViewInit {
   private slideTrack(index: number) {
     const track = this.trackRef?.nativeElement;
     if (!track) return;
-    animate(track, { x: -(index * this.slideAmount()) }, {
-      duration: 0.62,
-      ease: [0.22, 1, 0.36, 1],
-    });
+    // Framer motion animate call - consider replacing if not needed elsewhere
+    // animate(track, { x: -(index * this.slideAmount()) }, {
+    //   duration: 0.62,
+    //   ease: [0.22, 1, 0.36, 1],
+    // });
+    track.style.transform = `translateX(-${index * this.slideAmount()}px)`;
+    track.style.transition = `transform 0.62s cubic-bezier(0.22, 1, 0.36, 1)`;
   }
 
   private slideInstant(index: number) {
     const track = this.trackRef?.nativeElement;
     if (!track) return;
-    animate(track, { x: -(index * this.slideAmount()) }, { duration: 0 });
+    // Framer motion animate call - consider replacing if not needed elsewhere
+    // animate(track, { x: -(index * this.slideAmount()) }, { duration: 0 });
+    track.style.transform = `translateX(-${index * this.slideAmount()}px)`;
+    track.style.transition = `none`;
   }
 
   dotRange() { return Array.from({ length: this.maxIndex + 1 }, (_, i) => i); }

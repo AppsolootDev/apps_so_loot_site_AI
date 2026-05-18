@@ -1,8 +1,15 @@
+@font-face {
+  font-family: 'Spiderman';
+  src: url('../public/assets/fonts/spiderman.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --bg: #070e1a;
   --bg-card: rgba(75,200,232,0.04);
   --surface: rgba(75,200,232,0.06);
-  --lime: #4bc8e8;
+  --lime: #4bc2e8; /* Changed to a slightly different shade of lime */
   --lime-dim: rgba(75,200,232,0.12);
   --lime-glow: 0 0 30px rgba(75,200,232,0.3), 0 0 60px rgba(75,200,232,0.12);
   --text: #e8f4fd;
@@ -11,8 +18,8 @@
   --glass: rgba(75,200,232,0.04);
   --glass-border: rgba(75,200,232,0.12);
   --radius: 16px;
-  --font-display: 'Orbitron', monospace;
-  --font-body: 'Inter', sans-serif;
+  --font-display: 'Spiderman', monospace; /* Primary font for titles */
+  --font-body: 'Orbitron', monospace; /* Secondary font */
   --transition: 250ms cubic-bezier(0.4,0,0.2,1);
   --max-w: 1280px;
 }
@@ -54,7 +61,7 @@ ul, ol { list-style: none; }
 }
 
 .section-label {
-  font-family: var(--font-display);
+  font-family: var(--font-body); /* Changed to secondary font */
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.25em;
@@ -76,16 +83,51 @@ ul, ol { list-style: none; }
 }
 
 .section-title {
-  font-family: var(--font-display);
+  font-family: var(--font-display); /* Primary font for titles */
   font-size: clamp(1.875rem, 4vw, 2.75rem);
   font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.05em; /* Adjusted for Spiderman font */
   color: var(--text);
   margin-bottom: 20px;
+  /* Ensure title is a flex container for character animation */
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden; /* Hide overflow for initial state */
+}
+
+/* Styles for individual characters within an animated title */
+.section-title .char-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: 1.15;
+}
+
+.section-title .char {
+  display: inline-block;
+  transform: translateY(110%); /* Start off-screen */
+  opacity: 0; /* Start invisible */
+}
+
+.section-title.animate .char {
+  animation: slideInFromTop 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Animation for individual characters */
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
 }
 
 .section-subtitle {
+  font-family: var(--font-body); /* Changed to secondary font */
   font-size: 1.0625rem;
   color: var(--text-muted);
   max-width: 560px;
@@ -112,6 +154,7 @@ ul, ol { list-style: none; }
   border-radius: 10px;
   transition: all var(--transition);
   letter-spacing: 0.02em;
+  font-family: var(--font-body); /* Changed to secondary font */
 }
 
 .btn-primary:hover {
@@ -133,6 +176,7 @@ ul, ol { list-style: none; }
   border-radius: 10px;
   transition: all var(--transition);
   letter-spacing: 0.02em;
+  font-family: var(--font-body); /* Changed to secondary font */
 }
 
 .btn-outline:hover {
@@ -165,12 +209,9 @@ app-navbar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 8px; /* Small central dot */
-  height: 8px;
-  background-color: var(--lime);
-  border-radius: 50%;
+  /* Original size was likely larger, scaling down to 25% */
+  transform: translate(-50%, -50%) scale(0.25); /* 75% smaller */
   pointer-events: none;
-  transform: translate(-50%, -50%); /* Center the dot */
   z-index: 9999;
   /* Removed transition for instant movement */
 }
@@ -181,7 +222,14 @@ app-navbar {
   background-color: var(--lime);
   pointer-events: none;
   z-index: 9999;
+  display: none; /* Hidden by default */
   /* Removed transition for instant movement */
+}
+
+/* Crosshairs visible only when #hero-section has .active-crosshairs */
+#hero-section.active-crosshairs ~ #crosshair-h,
+#hero-section.active-crosshairs ~ #crosshair-v {
+  display: block;
 }
 
 #crosshair-h {
@@ -217,4 +265,171 @@ app-navbar {
   font-size: 0.9rem;
   z-index: 9998; /* Below the cursor */
   display: none; /* Hidden by default, will be shown with JS */
+}
+
+/* Styles for movable and clickable elements (rocket, alien, astronaut) */
+.movable-element {
+  position: absolute; /* Allows free positioning */
+  cursor: grab; /* Indicates it can be dragged */
+  z-index: 1000; /* Ensure it's above most content */
+  transition: transform var(--transition); /* Smooth movement if repositioned by JS */
+}
+
+/* Styles for the "Back to Top" launch pad icon */
+.back-to-top {
+  position: fixed;
+  bottom: 80px; /* Position above the chat bubble */
+  right: 20px;
+  z-index: 1000;
+  background: var(--lime);
+  color: var(--bg);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem; /* Adjust icon size as needed */
+  box-shadow: var(--lime-glow);
+  opacity: 0; /* Hidden by default */
+  visibility: hidden; /* Also hide from screen readers when not visible */
+  transform: translateY(10px); /* Slightly off-screen */
+  transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: #d4ff30;
+  transform: translateY(-2px);
+}
+
+/* Styles for the "Chat with Us" bubble icon */
+.chat-bubble {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: var(--lime);
+  color: var(--bg);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem; /* Adjust icon size as needed */
+  box-shadow: var(--lime-glow);
+  transition: background var(--transition), transform var(--transition);
+}
+
+.chat-bubble:hover {
+  background: #d4ff30;
+  transform: translateY(-2px);
+}
+
+/* Question and Answer Pop-up Styles */
+.qa-popup.detailed-question {
+  font-size: 0.8rem; /* Smaller font for detailed questions */
+}
+
+/* --- New Styles for Countdown Timer Overlay --- */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg); /* Use background variable */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000; /* Ensure it's on top of everything */
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.loading-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none; /* Allow interaction with content below once hidden */
+}
+
+.countdown-timer {
+  font-family: var(--font-display); /* Use primary display font */
+  font-size: clamp(3rem, 10vw, 8rem); /* Large, responsive font size */
+  color: var(--lime);
+  text-shadow: var(--lime-glow);
+  margin-bottom: 20px;
+}
+
+.loading-message {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: var(--text-muted);
+}
+
+/* --- New Styles for Generic Pop-ups (Astronaut/Rocket) --- */
+.generic-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--glass);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 10001; /* Above loading overlay if it's still present */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.generic-popup.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.generic-popup-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--lime);
+  text-align: center;
+}
+
+.generic-popup-content {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.generic-popup-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.generic-popup-close:hover {
+  color: var(--lime);
 }

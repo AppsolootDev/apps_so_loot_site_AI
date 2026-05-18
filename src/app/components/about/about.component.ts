@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { TitleAnimationDirective } from '../../directives/title-animation.directive'; // Import the new directive
+import { CommonModule } from '@angular/common'; // Import CommonModule for @for
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, TitleAnimationDirective], // Add CommonModule and the directive here
   templateUrl: './about.component.html',
   styleUrl: './about.component.css'
 })
@@ -20,4 +22,7 @@ export class AboutComponent {
     { icon: '◉', title: 'Innovation First', desc: 'We stay ahead of the curve — adopting AI, modern frameworks, and emerging technologies proactively.' },
     { icon: '◍', title: 'Partnership Mindset', desc: 'We embed ourselves in your vision. Your success is our benchmark, not just delivery milestones.' },
   ];
+
+  // Add titleChars for animation
+  readonly titleChars = 'Built by Builders, for Visionaries'.split('').map((char, i) => ({ char, i }));
 }

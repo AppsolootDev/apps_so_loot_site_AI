@@ -6,12 +6,12 @@
       <p class="section-label">Client Portfolio</p>
 
       <!-- Title: each char slides in from top -->
-      <h2 class="clients-title">
+      <h2 class="clients-title" appTitleAnimation>
         @for (item of titleChars; track item.i) {
           @if (item.char === ' ') {
-            <span class="tc-space">&nbsp;</span>
+            <span class="char-space">&nbsp;</span>
           } @else {
-            <span class="tc-wrap"><span class="tci">{{ item.char }}</span></span>
+            <span class="char-wrap"><span class="char">{{ item.char }}</span></span>
           }
         }
       </h2>

@@ -11,9 +11,10 @@
 
     <div class="nav-links" [class.open]="menuOpen()">
       @for (link of navLinks; track link.label) {
-        <a [href]="link.href" class="nav-link" (click)="closeMenu()">{{ link.label }}</a>
+        <a [href]="link.href" class="nav-link" [class.active]="activeSection() === link.id" (click)="closeMenu()">{{ link.label }}</a>
       }
       <a href="#contact" class="nav-cta" (click)="closeMenu()">Get Started</a>
+      <div class="nav-indicator"></div> <!-- Animated indicator -->
     </div>
 
     <button class="hamburger" (click)="toggleMenu()" [class.open]="menuOpen()" aria-label="Toggle navigation">

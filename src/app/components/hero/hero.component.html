@@ -14,7 +14,7 @@
   <div class="space-chars" aria-hidden="true">
 
     <!-- Rocket flying across -->
-    <div class="char-rocket">
+    <div class="char-rocket" (click)="toggleRocket()">
       <svg viewBox="0 0 48 76" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- Exhaust flame outer -->
         <path d="M18 57C15 65 13 74 18 76C20 72 24 66 24 66C24 66 28 72 30 76C35 74 33 65 30 57Z" fill="#ff6b00" opacity="0.9"/>
@@ -42,10 +42,16 @@
       </svg>
       <!-- Exhaust trail -->
       <div class="rocket-trail"></div>
+      @if (showRocketCard()) {
+        <div class="char-popup rocket-popup">
+          <img src="/assets/icons/git.png" alt="Git Icon" class="char-popup-icon">
+          <p class="char-popup-text">CI/CD Pipelines</p>
+        </div>
+      }
     </div>
 
     <!-- Floating astronaut -->
-    <div class="char-astronaut">
+    <div class="char-astronaut" (click)="toggleAstronaut()">
       <svg viewBox="0 0 56 84" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- PLSS backpack -->
         <rect x="13" y="37" width="9" height="14" rx="2" fill="#8aa0b8"/>
@@ -85,10 +91,16 @@
         <!-- Tether line -->
         <path d="M50 45C56 38 55 27 50 20" stroke="#4bc8e8" stroke-width="1.3" stroke-dasharray="3 2.5" opacity="0.5"/>
       </svg>
+      @if (showAstronautCard()) {
+        <div class="char-popup astronaut-popup">
+          <img src="/assets/icons/figma.png" alt="Figma Icon" class="char-popup-icon">
+          <p class="char-popup-text">Agile Software Development</p>
+        </div>
+      }
     </div>
 
     <!-- Alien + UFO (AI / LLM) -->
-    <div class="char-alien-ufo">
+    <div class="char-alien-ufo" (click)="openTeam(0)">
       <div class="ufo-labels">
         <span class="ufo-label-llm">LLM</span>
         <span class="ufo-label-ai">AI</span>
@@ -188,7 +200,7 @@
         </span>
       </h1>
 
-      <p class="hero-typed hero-typed--animate">
+      <p class="hero-typed hero-typed--animate fade-in-left">
         {{ typedText() }}<span class="cursor">|</span>
       </p>
     </div>
@@ -250,9 +262,44 @@
                [style.color]="selectedPlanet()!.glow"
                [style.border-color]="selectedPlanet()!.glow + '55'"
                [style.background]="selectedPlanet()!.glow + '14'">
-            {{ selectedPlanet()!.techAbbr }}
+            <img [src]="getTechIconPath(selectedPlanet()!.techAbbr)" [alt]="selectedPlanet()!.tech + ' icon'" class="pm-badge-icon">
           </div>
           <p class="pm-planet-label">{{ selectedPlanet()!.name }}</p>
+
+          <!-- Cross-hairs for focused planet -->
+          <div class="pm-crosshairs">
+            <div class="pm-crosshair-h"></div>
+            <div class="pm-crosshair-v"></div>
+          </div>
+
+          <!-- Moons and Day Length -->
+          <div class="pm-details-section pm-moons-day-layout">
+            <div class="pm-detail-item">
+              <img src="/assets/icons/moon.png" alt="Moons Icon" class="pm-detail-icon">
+              <p>{{ selectedPlanet()!.moonsCount }} Moons</p>
+            </div>
+            <div class="pm-detail-item">
+              <img src="/assets/icons/day.png" alt="Day Icon" class="pm-detail-icon">
+              <p>{{ selectedPlanet()!.dayLength }}</p>
+            </div>
+          </div>
+
+          <!-- Chemical Composition -->
+          @if (selectedPlanet()!.composition && selectedPlanet()!.composition.length > 0) {
+            <div class="pm-composition-section">
+              <h4 class="pm-section-title">Composition</h4>
+              <div class="pm-composition-list pm-composition-horizontal">
+                @for (element of selectedPlanet()!.composition; track element!.symbol) {
+                  <div class="pm-composition-tile"
+                       [style.border]="'3px solid ' + selectedPlanet()!.glow">
+                    <span class="pm-element-number">{{ element!.number }}</span>
+                    <span class="pm-element-symbol">{{ element!.symbol }}</span>
+                    <span class="pm-element-weight">{{ element!.weight }}</span>
+                  </div>
+                }
+              </div>
+            </div>
+          }
         </div>
 
         <!-- Right: content -->
@@ -304,6 +351,54 @@
           </p>
         </div>
 
+      </div>
+    </div>
+  }
+
+  <!-- Team Modal -->
+  @if (showTeamModal()) {
+    <div class="team-modal" (click)="closePlanet()" role="dialog" aria-modal="true">
+      <div class="tm-inner" (click)="$event.stopPropagation()">
+        <!-- Close -->
+        <button class="tm-close" (click)="closePlanet()" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <div class="tm-content">
+          <h2 class="tm-title">Our Team</h2>
+
+          <div class="tm-members">
+            @for (member of teamMembers; track member.name) {
+              <div class="tm-member">
+                <div class="tm-member-header">
+                  <img [src]="member.linkedinProfilePic" alt="{{ member.name }} Profile"  class="tm-member-profile-pic">
+                  <div>
+                    <h3 class="tm-member-name">{{ member.name }}</h3>
+                    <p class="tm-member-role">{{ member.role }}</p>
+                    <p class="tm-member-experience">{{ member.yearsExperience }}+ Years Experience</p>
+                  </div>
+                </div>
+                <p class="tm-member-bio">{{ member.bio }}</p>
+                <div class="tm-social-links">
+                  <a [href]="member.linkedin" target="_blank" class="tm-social-icon">
+                    <img width="50px" height="50px" src="/assets/icons/linkedin.png" alt="LinkedIn">
+                  </a>
+                  <span class="tm-social-icon">
+                    <img width="50px" height="50px" [src]="member.instagramIcon" alt="Instagram">
+                  </span>
+                  <span class="tm-social-icon">
+                    <img width="50px" height="50px" [src]="member.xIcon" alt="X (Twitter)">
+                  </span>
+                  <span class="tm-social-icon">
+                    <img width="50px" height="50px" [src]="member.facebookIcon" alt="Facebook">
+                  </span>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
       </div>
     </div>
   }

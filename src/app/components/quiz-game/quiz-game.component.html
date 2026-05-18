@@ -1,0 +1,56 @@
+<div class="quiz-game-container">
+  <canvas #quizCanvas class="quiz-canvas"></canvas>
+
+  <div class="quiz-overlay" *ngIf="gameStarted()">
+    <div class="quiz-content">
+      <div class="quiz-header">
+        <h2 class="quiz-title">Planet Quiz</h2>
+        <div class="quiz-stats">
+          <span class="score">Score: {{ score() }}</span>
+          <span class="lives">Lives: {{ maxWrongAnswers - wrongAnswers() }}</span>
+        </div>
+      </div>
+
+      <div *ngIf="currentQuestion() && !gameEndedState()" class="question-area">
+        <p class="question-text">{{ currentQuestion()!.question }}</p>
+        <div class="options">
+          <button *ngFor="let option of currentQuestion()!.options"
+                  class="btn-option"
+                  (click)="checkAnswer(option)">
+            {{ option }}
+          </button>
+        </div>
+      </div>
+
+      <div *ngIf="gameEndedState()" class="game-end-screen">
+        <h3 class="game-end-message" [class.win]="gameWon()" [class.lose]="!gameWon()">
+          {{ gameWon() ? 'You Won!' : 'Game Over!' }}
+        </h3>
+        <p *ngIf="gameWon()">Congratulations! You answered all questions correctly.</p>
+        <p *ngIf="!gameWon()">You ran out of lives. Better luck next time!</p>
+        <p>Total Score: {{ score() }}</p>
+
+        <div *ngIf="showEmailPrompt()" class="email-prompt">
+          <p>You've won {{ winCount() }} times! Win 50 times for a chance at a discount!</p>
+          <p>Enter your email to be notified if you qualify:</p>
+          <input type="email" [(ngModel)]="emailAddress" placeholder="your.email@example.com" class="email-input">
+          <button class="btn-primary" (click)="submitEmail()">Submit Email</button>
+        </div>
+
+        <div class="game-end-actions">
+          <button class="btn-primary" (click)="playAgain()">Play Again</button>
+          <button class="btn-outline" (click)="enterSite()">Enter Site</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz-start-screen" *ngIf="!gameStarted()">
+    <div class="quiz-content">
+      <h1 class="quiz-title">Welcome to the Planet Quiz!</h1>
+      <p class="quiz-message">Test your knowledge about the planets in our solar system.</p>
+      <p class="quiz-rules">Answer 5 questions correctly to win. You have {{ maxWrongAnswers }} lives.</p>
+      <button class="btn-primary" (click)="startGame()">Start Quiz</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,219 @@
+.quiz-game-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99; /* Below the intro-overlay, but above main content */
+  background-color: var(--bg); /* Fallback background */
+}
+
+.quiz-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.quiz-overlay, .quiz-start-screen {
+  position: relative;
+  z-index: 1; /* Above the canvas */
+  text-align: center;
+  padding: 40px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.quiz-title {
+  font-family: var(--font-display); /* Spiderman font */
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--lime);
+  text-shadow: 0 0 10px rgba(75,200,232,0.5);
+}
+
+.quiz-stats {
+  display: flex;
+  gap: 20px;
+  font-family: var(--font-body); /* Orbitron font */
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.score, .lives {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.lives {
+  color: var(--lime);
+}
+
+.question-area {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.question-text {
+  font-family: var(--font-body); /* Orbitron font */
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text);
+  min-height: 80px; /* Ensure consistent height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column for options */
+  gap: 10px;
+}
+
+.btn-option {
+  background: rgba(75,200,232,0.08);
+  border: 1px solid rgba(75,200,232,0.22);
+  color: var(--text);
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-family: var(--font-body); /* Orbitron font */
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  text-align: left;
+}
+
+.btn-option:hover {
+  background: rgba(75,200,232,0.15);
+  border-color: var(--lime);
+  color: var(--lime);
+  transform: translateY(-2px);
+}
+
+.game-end-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.game-end-message {
+  font-family: var(--font-display); /* Spiderman font */
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin-bottom: 10px;
+}
+
+.game-end-message.win {
+  color: #4ade80; /* Green for win */
+  text-shadow: 0 0 15px rgba(74,222,128,0.7);
+}
+
+.game-end-message.lose {
+  color: #f05340; /* Red for lose */
+  text-shadow: 0 0 15px rgba(240,83,64,0.7);
+}
+
+.game-end-screen p {
+  font-family: var(--font-body); /* Orbitron font */
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.email-prompt {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(75,200,232,0.05);
+  border: 1px solid rgba(75,200,232,0.15);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.email-prompt p {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.email-input {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  background-color: rgba(0,0,0,0.3);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+.email-input::placeholder {
+  color: var(--text-muted);
+}
+
+.game-end-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.quiz-start-screen .quiz-message,
+.quiz-start-screen .quiz-rules {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.quiz-start-screen .btn-primary {
+  margin-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .quiz-overlay, .quiz-start-screen {
+    padding: 25px;
+    max-width: 95%;
+  }
+
+  .quiz-header {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .quiz-stats {
+    justify-content: center;
+  }
+
+  .question-text {
+    font-size: 1rem;
+    min-height: 60px;
+  }
+
+  .btn-option {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
+
+  .game-end-actions {
+    flex-direction: column;
+  }
+}

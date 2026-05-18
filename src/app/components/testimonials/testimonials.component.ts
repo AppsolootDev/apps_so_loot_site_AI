@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TitleAnimationDirective } from '../../directives/title-animation.directive';
+import { CommonModule } from '@angular/common'; // Import CommonModule for @for
 
 interface Testimonial {
   id: number;
@@ -14,7 +16,10 @@ interface Testimonial {
 @Component({
   selector: 'app-testimonials',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule, // Add CommonModule
+    TitleAnimationDirective
+  ],
   templateUrl: './testimonials.component.html',
   styleUrl: './testimonials.component.css'
 })
@@ -51,6 +56,9 @@ export class TestimonialsComponent {
       rating: 5
     }
   ];
+
+  // Add titleChars for animation
+  readonly titleChars = 'What Our Clients Say'.split('').map((char, i) => ({ char, i }));
 
   stars(rating: number): number[] {
     return Array.from({ length: rating }, (_, i) => i);

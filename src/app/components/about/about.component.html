@@ -3,7 +3,15 @@
     <div class="about-grid">
       <div class="about-left">
         <p class="section-label">Who We Are</p>
-        <h2 class="section-title">Built by Builders,<br>for Visionaries</h2>
+        <h2 class="section-title" appTitleAnimation>
+          @for (item of titleChars; track item.i) {
+            @if (item.char === ' ') {
+              <span class="char-space">&nbsp;</span>
+            } @else {
+              <span class="char-wrap"><span class="char">{{ item.char }}</span></span>
+            }
+          }
+        </h2>
         <p class="about-lead">
           AppSoLoot is a Pretoria-based digital agency specializing in AI, web, mobile, and design. We partner with ambitious startups, SMEs, and enterprises to build technology that makes a meaningful impact.
         </p>

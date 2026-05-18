@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { TitleAnimationDirective } from '../../directives/title-animation.directive'; // Import the new directive
+import { CommonModule } from '@angular/common'; // Import CommonModule for @for
 
 interface Project {
   id: number;
@@ -16,7 +18,7 @@ interface Project {
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, TitleAnimationDirective], // Add CommonModule and the directive here
   templateUrl: './portfolio.component.html',
   styleUrl: './portfolio.component.css'
 })
@@ -68,4 +70,7 @@ export class PortfolioComponent {
       category: 'AI Solution'
     }
   ];
+
+  // Add titleChars for animation
+  readonly titleChars = 'Featured Projects'.split('').map((char, i) => ({ char, i }));
 }

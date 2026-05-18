@@ -1,0 +1,10 @@
+<div class="intro-overlay" *ngIf="showIntro()">
+  <div class="intro-content">
+    <h1 class="intro-title">Welcome to AppSoLoot</h1>
+    <p class="intro-message">Do you want to play the game or enter the application?</p>
+    <div class="intro-actions">
+      <button class="btn-primary" (click)="playGame()">Play Game</button>
+      <button class="btn-outline" (click)="enterApp()">Enter</button>
+    </div>
+  </div>
+</div>
